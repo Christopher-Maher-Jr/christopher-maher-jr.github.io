@@ -83,16 +83,12 @@
          */
         function update() {
           moveBoxTo(positionX, positionY);
-          positionX = positionX + speed;
-          positionY = positionY + speedY;
-          if (positionX > boardWidth) {
-            speed *= -1;
-          } if (positionX < 0) {
-            speed *= -1;
-          } if (positionY > boardHeight - boxHeight) {
-            speedY *= -1;
-          } if (positionY < 0) {
-            speedY *= -1
+          positionX += speed;
+          positionY += speedY
+          if (positionX > boardWidth - boxHeight || positionX < 0) {
+            speed = -speed + (Math.random() * 4 - 2);
+          } if (positionY > boardHeight - boxHeight || positionY < 0) {
+            speedY = -speedY + (Math.random() * 4 - 2);
           }
         }
         /**
