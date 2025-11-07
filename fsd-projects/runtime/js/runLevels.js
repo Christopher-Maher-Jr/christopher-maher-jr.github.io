@@ -37,19 +37,41 @@ var runLevels = function (window) {
       redSquare.x = -25;
       redSquare.y = -25;
       enemy.addChild(redSquare);
-      enemy.x = x
-      enemy.y = y
+      enemy.x = x;
+      enemy.y = y;
       game.addGameItem(enemy);
-      enemy.velocityX = -3
-      enemy.rotationalVelocity = 10
+      enemy.velocityX = -4;
+      enemy.rotationalVelocity = 10;
       enemy.onPlayerCollision = function playerCollision() {
-      game.changeIntegrity(-10)
+      game.changeIntegrity(-10);
      };
       enemy.onProjectileCollision = function projectileCollision() {
-      game.increaseScore(100);
+      game.increaseScore(10);
       enemy.fadeOut();
      };
-   } 
+   }
+
+    function createReward(x, y) {
+      var reward = game.createGameItem("reward", 25);
+      var rewardItem = draw.rect(50, 50, "yellow");
+      rewardItem.x = -25;
+      rewardItem.y = -25;
+      reward.addChild(rewardItem);
+      reward.x = x;
+      reward.y = y;
+      game.addGameItem(reward);
+      reward.velocityX = -2
+      reward.onPlayerCollision = function playerRewardCollision() {
+        game.changeIntegrity(100);
+        game.increaseScore(1000);
+        reward.fadeOut();
+      };
+      reward.onProjectileCollision = function projectileRewardCollision() {
+        game.changeIntegrity(100);
+        game.increaseScore(1000);
+        reward.fadeOut();
+      };
+    }
 
     function startLevel() {
       // TODO 13 goes below here
