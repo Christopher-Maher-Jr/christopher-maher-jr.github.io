@@ -127,16 +127,14 @@ function moveSnake() {
    stored in the Array snake.body and each part knows its current
    column/row properties.
  */
+for (let i = snake.body.length - 1; i > 0; i--) {
+    var currentSnakeSquare = snake.body[i];
+    var snakeSquareInFront = snake.body[i - 1];
 
+    moveBodyAToBodyB(currentSnakeSquare, snakeSquareInFront);
 
-
-
-
-
-
-
-
-
+    repositionSquare(currentSnakeSquare);
+}
  //Before moving the head, check for a new direction from the keyboard input
  checkForNewDirection();
 
@@ -152,29 +150,27 @@ if (snake.head.direction === "left") {
 } else if (snake.head.direction === "right") {
  snake.head.column = snake.head.column + 1;
 } else if (snake.head.direction === "down") {
- snake.head.row = snake.head.row - 1;
+ snake.head.row = snake.head.row + 1;
 } else if (snake.head.direction === "up") {
- snake.head.row = snake.head.row + 1
+ snake.head.row = snake.head.row - 1
 }
 
-
-
-
-
-
+repositionSquare(snake.head);
 }
 
 
 // TODO 9: Create a new helper function
+function moveBodyAToBodyB(bodyA, bodyB){
+  bodyA.row = bodyB.row
+  bodyA.column = bodyB.column
+  bodyA.direction = bodyB.direction 
+}
 
-
-
-
-
-
-
-
-
+console.log("Moving body A to body B...");
+setTimeout(() => {
+  moveBodyAToBodyB(snake.body[1], snake.head);
+  repositionSquare(snake.body[1]);
+}, 2_000);
 
 function hasHitWall() {
  /*
@@ -184,12 +180,15 @@ function hasHitWall() {
    HINT: What will the row and column of the snake's head be if this were the case?
  */
 
-
-
-
-
-
- return false;
+  if (
+    snake.head.row < 0 ||
+    snake.head.row > ROWS - 1 ||
+    snake.head.column < 0 ||
+    snake.head.column > COLUMNS - 1
+  ) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -200,13 +199,10 @@ function hasCollidedWithApple() {
   
    HINT: Both the apple and the snake's head are aware of their own row and column
  */
-
-
-
-
-
-
- return false;
+if (snake.head.row === apple.row && snake.head.column === apple.column) {
+  return true
+}
+return false;
 }
 
 
@@ -235,15 +231,19 @@ function hasCollidedWithSnake() {
    HINT: Each part of the snake's body is stored in the snake.body Array. The
    head and each part of the snake's body also knows its own row and column.
  */
+  for (let i = 1; i < snake.body.length; i++) {
+    const segment = snake.body[i];
 
+    if (
+      segment.row === snake.head.row &&
+      segment.column === snake.head.column
+    ) {
+      return true;
+    }
+  }
 
-
-
-
-
- return false;
+  return false;
 }
-
 
 function endGame() {
  // stop update function from running
@@ -379,32 +379,31 @@ function repositionSquare(square) {
 function getRandomAvailablePosition() {
  var spaceIsAvailable;
  var randomPosition = {};
-
-
  /* Generate random positions until one is found that doesn't overlap with the snake */
  while (!spaceIsAvailable) {
    randomPosition.column = Math.floor(Math.random() * COLUMNS);
    randomPosition.row = Math.floor(Math.random() * ROWS);
    spaceIsAvailable = true;
-
-
    /*
      TODO 14: After generating the random position determine if that position is
      not occupied by a snakeSquare in the snake's body. If it is then set
      spaceIsAvailable to false so that a new position is generated.
    */
+  for (let i = 0; i < snake.body.length; i++) {
+      const segment = snake.body[i];
 
+      if (
+        segment.row === randomPosition.row &&
+        segment.column === randomPosition.column
+      ) {
+        spaceIsAvailable = false;
+        break;
+      }
+    }
+  }
 
-
-
-
-
- }
-
-
- return randomPosition;
+  return randomPosition;
 }
-
 
 function calculateHighScore() {
  // retrieve the high score from session storage if it exists, or set it to 0
