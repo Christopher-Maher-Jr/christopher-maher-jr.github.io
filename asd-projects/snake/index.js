@@ -10,19 +10,13 @@ var scoreElement = $("#score");
 var highScoreElement = $("#highScore");
 
 /// Game Variables
-const apple = {};
-const snake = {};
 var score = 0; // variable to keep track of the score
 var started = false; // variable to keep track of whether the game has started
 // TODO 4, Part 1: Create the apple variable
-
-
-
+const apple = {};
 
 // TODO 5, Part 1: Create the snake variable
-
-
-
+const snake = {};
 
 // Constant Variables
 var ROWS = 20;
