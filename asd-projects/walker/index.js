@@ -42,7 +42,7 @@ function runProgram(){
   var score2 = 0
 
   var baseSpeed = 5
-  var runnerBoost = 2
+  var runnerBoost = 1
 
   updateColors()
   // Game Item Objects
