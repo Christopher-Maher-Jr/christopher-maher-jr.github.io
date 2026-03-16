@@ -22,6 +22,9 @@ function runProgram(){
     D: 68,
     S: 83
   };
+
+  var keysDown = {};
+
   var walker = {
     x: 0,
     y: 0,
@@ -30,8 +33,8 @@ function runProgram(){
   }
 
   var walker2 = {
-    x: 390,
-    y: 390,
+    x: 1850,
+    y: 850,
     speedX: 0,
     speedY: 0
   }
@@ -42,7 +45,7 @@ function runProgram(){
   var score2 = 0
 
   var baseSpeed = 5
-  var runnerBoost = 1
+  var runnerBoost = 2
 
   updateColors()
   // Game Item Objects
@@ -69,6 +72,7 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
+    updateMovement()
     repositionGameItem()
     redrawGameItem()
     wallCollision(walker, "#walker")
@@ -83,33 +87,8 @@ function runProgram(){
   Note: You can have multiple event handlers for different types of events.
   */
   function handleKeyDown(event) {
-    //walker 1, WASD
-    var speed1 = getSpeed(1)
+     keysDown[event.which] = true;
 
-    if (event.which === KEY.A) {
-      walker.speedX = -speed1;
-    } else if (event.which === KEY.W) {
-      walker.speedY = -speed1
-    } else if (event.which === KEY.D) {
-      walker.speedX = speed1
-    } else if (event.which === KEY.S) {
-      walker.speedY = speed1
-    }
-    
-    
-    //walker 2, arrow keys
-    var speed2 = getSpeed(2)
-
-    if (event.which === KEY.LEFT) {
-      walker2.speedX = -speed2
-    } else if (event.which === KEY.UP) {
-      walker2.speedY = -speed2
-    } else if (event.which === KEY.RIGHT) {
-      walker2.speedX = speed2
-    } else if (event.which === KEY.DOWN) {
-      walker2.speedY = speed2
-    }
-    
     if (event.which === KEY.ENTER){
       resetGame()
 }
@@ -117,21 +96,7 @@ function runProgram(){
   }
 
   function handleKeyUp(event){
-  // walker 1
-  if (event.which === KEY.A || event.which === KEY.D) {
-      walker.speedX = 0
-  }
-    if (event.which === KEY.W || event.which === KEY.S) {
-      walker.speedY = 0
-  }
-
-  // walker 2
-    if (event.which === KEY.LEFT || event.which === KEY.RIGHT) {
-      walker2.speedX = 0
-  }
-    if (event.which === KEY.UP || event.which === KEY.DOWN) {
-      walker2.speedY = 0
-  }
+   delete keysDown[event.which];
 }
 
 
@@ -139,6 +104,45 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+
+  function updateMovement(){
+
+  var speed1 = getSpeed(1)
+
+  walker.speedX = 0
+  walker.speedY = 0
+
+  if (keysDown[KEY.A]) {
+    walker.speedX = -speed1
+  }
+  if (keysDown[KEY.D]) {
+    walker.speedX = speed1
+  }
+  if (keysDown[KEY.W]) {
+    walker.speedY = -speed1
+  }
+  if (keysDown[KEY.S]) {
+    walker.speedY = speed1
+  }
+
+  var speed2 = getSpeed(2)
+
+  walker2.speedX = 0
+  walker2.speedY = 0
+
+  if (keysDown[KEY.LEFT]) {
+    walker2.speedX = -speed2
+  }
+  if (keysDown[KEY.RIGHT]) {
+    walker2.speedX = speed2
+  }
+  if (keysDown[KEY.UP]) {
+    walker2.speedY = -speed2
+  }
+  if (keysDown[KEY.DOWN]) {
+    walker2.speedY = speed2
+  }
+}
 
   function repositionGameItem(){
     walker.x = walker.x + walker.speedX

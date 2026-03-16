@@ -1,11 +1,14 @@
 
 body {
   background-color: darkgreen;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#board {
-  width: 440px;
-  height: 440px;
+#board{
+  width: 1900px;
+  height: 900px;
   border: 1px solid white;
   background-color: black;
   position: relative;
@@ -13,9 +16,9 @@ body {
 
 #scoreboard{
   display: flex;
-  justify-content: space-between;
-  width: 400px;
-  margin-bottom: 10px;
+  justify-content: center;
+  gap: 500px;
+  margin-top: 20px;
 }
 
 .scoreBox{
@@ -28,7 +31,7 @@ body {
   border-radius: 8px;
 }
 
-#walker {
+#walker{
   background-color: cyan;
   width: 50px;
   height: 50px;
@@ -37,7 +40,7 @@ body {
    top: 0px;  
 }
 
-#walker2 {
+#walker2{
   background-color: magenta;
   width: 50px;
   height: 50px;
