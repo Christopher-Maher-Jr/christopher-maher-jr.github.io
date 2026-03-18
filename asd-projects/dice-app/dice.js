@@ -3,12 +3,13 @@ $(document).ready(function () {
 
 function makeDot(top, left, elementID){
 $("<div>")
-.css("height", 15)
-.css("width", 15)
+.css("height", "15px")
+.css("width", "15px")
 .css("background-color", "black")
 .css("position", "absolute")
-.css("top", top)
-.css("left", left)
+.css("top", top + "%")
+.css("left", left + "%")
+.css("transform", "translate(-50%, -50%)")
 .appendTo(elementID);
 }
 
@@ -46,11 +47,16 @@ function rollDie(dieID) {
   makeDot(50, 75, dieID); // middle right
   makeDot(75, 75, dieID); // bottom right
 }
+  return randomNum
 }
 
 function handleClick(){
-  rollDie("#die")
+  let die1 = rollDie("#die1")
+  let die2 = rollDie("#die2")
+
+  let total = die1 + die2
+  $("#total").text("Total: " + total);
 }
 
-$("#die").on("click", handleClick);
+$(".dice").on("click", handleClick)
 });

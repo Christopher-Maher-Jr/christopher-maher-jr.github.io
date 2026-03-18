@@ -1,6 +1,13 @@
-#die {
+.dice {
+  display: flex;
+  gap: 50px; 
+}
+
+#die1, #die2 {
   height: 100px;
   width: 100px;
-  background-color: lightgray; /* Feel free to customize */
+  background-color: lightgray; 
   position: relative;
+  border: 2px solid black
 }
+
