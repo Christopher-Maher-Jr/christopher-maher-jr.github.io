@@ -1,14 +1,14 @@
 
 body {
-  background-color: darkgreen;
+  background-color: gray;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 #board{
-  width: 1900px;
-  height: 900px;
+  width: 1200px;
+  height: 885px;
   border: 1px solid white;
   background-color: black;
   position: relative;

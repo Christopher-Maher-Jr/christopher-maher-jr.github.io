@@ -33,8 +33,8 @@ function runProgram(){
   }
 
   var walker2 = {
-    x: 1850,
-    y: 850,
+    x: 1150,
+    y: 835,
     speedX: 0,
     speedY: 0
   }
@@ -151,6 +151,7 @@ function runProgram(){
     walker2.x = walker2.x + walker2.speedX
     walker2.y = walker2.y + walker2.speedY
   }
+
   function redrawGameItem(){
     $("#walker").css("left", walker.x + "px")
     $("#walker").css("top", walker.y + "px")
