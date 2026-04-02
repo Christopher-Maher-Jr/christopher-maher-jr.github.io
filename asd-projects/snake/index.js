@@ -19,8 +19,8 @@ const apple = {};
 const snake = {};
 
 // Constant Variables
-var ROWS = 20;
-var COLUMNS = 20;
+var ROWS = 30;
+var COLUMNS = 30;
 var SQUARE_SIZE = 20;
 var KEY = {
  LEFT: 37,
@@ -76,15 +76,17 @@ updateInterval = setInterval(update, 100);
 */
 function update() {
  // TODO 6, Part 2: Fill in the update function's code block
- if (started) {
- moveSnake();
-} if (hasHitWall() || hasCollidedWithSnake()) {
- endGame();
-} if (hasCollidedWithApple()) {
- handleAppleCollision();
-}
+  if (started) {
+    moveSnake();
 
+    if (hasHitWall() || hasCollidedWithSnake()) {
+      endGame();
+    }
 
+    if (hasCollidedWithApple()) {
+      handleAppleCollision();
+    }
+  }
 }
 
 
@@ -159,12 +161,6 @@ function moveBodyAToBodyB(bodyA, bodyB){
   bodyA.column = bodyB.column
   bodyA.direction = bodyB.direction 
 }
-
-console.log("Moving body A to body B...");
-setTimeout(() => {
-  moveBodyAToBodyB(snake.body[1], snake.head);
-  repositionSquare(snake.body[1]);
-}, 2_000);
 
 function hasHitWall() {
  /*
@@ -358,13 +354,9 @@ function repositionSquare(square) {
  var row = square.row;
  var column = square.column;
 
-
- var buffer = 20;
-
-
  // position the square on the screen according to the row and column
- squareElement.css("left", column * SQUARE_SIZE + buffer);
- squareElement.css("top", row * SQUARE_SIZE + buffer);
+ squareElement.css("left", column * SQUARE_SIZE);
+ squareElement.css("top", row * SQUARE_SIZE);
 }
 
 
