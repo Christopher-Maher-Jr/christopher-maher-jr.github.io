@@ -172,9 +172,15 @@ function runProgram(){
   if (itPlayer === 1){
     $("#walker").css("background-color", "magenta")
     $("#walker2").css("background-color", "cyan")
+
+    $("#walker").text("It")
+    $("#walker2").text("")
   } else {
     $("#walker2").css("background-color", "magenta")
     $("#walker").css("background-color", "cyan")
+
+    $("#walker2").text("It")
+    $("#walker").text("")
   }
 }
 
