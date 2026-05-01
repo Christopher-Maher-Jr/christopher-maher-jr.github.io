@@ -185,24 +185,24 @@ function runProgram(){
 }
 
   function wallCollision(player, selector){
-    var boardWidth = $("#board").width()
-    var boardHeight = $("#board").height()
-    var playerWidth = $(selector).width()
-    var playerHeight = $(selector).height()
-
-    if (player.x < 0) {
-      player.x -= player.speedX
-    }
-    if (player.x > boardWidth - playerWidth) {
-      player.x -= player.speedX
-    } 
-    if (player.y < 0) {
-      player.y -= player.speedY
-    } 
-    if (player.y > boardHeight - playerHeight) {
-      player.y -= player.speedY
-    }
+  var boardWidth = $("#board").width()
+  var boardHeight = $("#board").height()
+  var playerWidth = $(selector).width()
+  var playerHeight = $(selector).height()
+  
+  if (player.x < 0) {
+    player.x = 0
   }
+  if (player.x > boardWidth - playerWidth) {
+    player.x = boardWidth - playerWidth
+  } 
+  if (player.y < 0) {
+    player.y = 0
+  } 
+  if (player.y > boardHeight - playerHeight) {
+    player.y = boardHeight - playerHeight
+  }
+}
 
   function playerCollision(player1, player2, selector1, selector2){
   var p1Width = $(selector1).width()
