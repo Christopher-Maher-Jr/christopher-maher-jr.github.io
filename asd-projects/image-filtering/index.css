@@ -23,6 +23,14 @@ button {
   background: green;
 }
 
-#reset {
+#invert {
+  background: purple;
+}
+
+#swap {
   background: red;
+}
+
+#reset {
+  background: gray;
 }

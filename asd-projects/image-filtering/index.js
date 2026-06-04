@@ -3,6 +3,8 @@
 $(document).ready(function () {
   render($("#display"), image);
   $("#apply").on("click", applyAndRender);
+  $("#invert").on("click", invertAndRender);
+  $("#swap").on("click", swapAndRender)
   $("#reset").on("click", resetAndRender);
 });
 
@@ -16,11 +18,21 @@ function resetAndRender() {
   render($("#display"), image);
 }
 
+function invertAndRender() {
+ applyFilter(invertFilter);
+ render($("#display"), image);
+}
+
+function swapAndRender(){
+  applyFilter(greenToRed);
+  render($("#display"), image);
+}
+
 // this function applies the filters to the image and is where you should call
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-  applyFilter(invertFilter)
+  applyFilter(tintPurple);
   // do not change the below line of code
   render($("#display"), image);
 }
@@ -103,3 +115,12 @@ function invertFilter(pixelArray){
   pixelArray[GREEN] = 255 - pixelArray[GREEN];
   pixelArray[BLUE] = 255 - pixelArray[BLUE];
 }
+ function greenToRed(pixelArray){
+  if (
+    pixelArray[GREEN] > pixelArray[RED] &&
+    pixelArray[GREEN] > pixelArray[BLUE]
+  ) {
+    pixelArray[RED] = pixelArray[GREEN];
+    pixelArray[GREEN] = 0;
+  }
+ }
